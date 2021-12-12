@@ -1,0 +1,1 @@
+{"list":[{"previousButtonName":"","currentButtonName":"test","buttonSettings":"P:2 Life:500 ±20","startingLifePoints":500,"increment":20,"players":1,"matchType":1,"buttonColor":"green","xSprite":0,"ySprite":0,"bytes":[]}]}
