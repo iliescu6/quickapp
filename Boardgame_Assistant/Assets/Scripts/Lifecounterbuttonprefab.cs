@@ -6,7 +6,7 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Lifecounterbuttonprefab : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+public class Lifecounterbuttonprefab : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,IDragHandler 
 {
     [SerializeField] public TMP_Text buttonName;
     [SerializeField] TMP_Text buttonSettingsText;
@@ -18,14 +18,15 @@ public class Lifecounterbuttonprefab : MonoBehaviour, IPointerDownHandler, IPoin
     [SerializeField] Button returnButton;
     [SerializeField] Image buttonImage;
     [SerializeField] float requiredHoldTime;
-    UnityAction openScreen;
+    ShowSceneAction openScreen;
 
     bool holdingButton;
+    bool pointerInrect = true;
     float holdTimer;
 
     public SerializableLifeCounterPreset localPreset;
 
-    public void SetUpButton(string name, string settings, SerializableLifeCounterPreset prest, Sprite sprite,UnityAction action)
+    public void SetUpButton(string name, string settings, SerializableLifeCounterPreset prest, Sprite sprite, ShowSceneAction action)
     {
         buttonName.text = name;
         buttonSettingsText.text = settings;
@@ -58,19 +59,25 @@ public class Lifecounterbuttonprefab : MonoBehaviour, IPointerDownHandler, IPoin
     public void OnPointerDown(PointerEventData eventData)
     {
         holdingButton = true;
+        pointerInrect = true;
+    }
+
+    public void OnDrag(PointerEventData eventData)
+    {
+        pointerInrect = false;
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
         holdingButton = false;
-        if (holdTimer > requiredHoldTime)
+        if (holdTimer > requiredHoldTime && pointerInrect)
         {
             buttonsContainer.SetActive(true);
             nameContainer.SetActive(false);
         }
-        else
+        else if (pointerInrect)
         {
-            openScreen.Invoke();
+            openScreen.Invoke(localPreset);
         }
         holdTimer = 0;
     }

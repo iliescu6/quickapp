@@ -35,6 +35,7 @@ public class ScreensController : SingletonTemplate<ScreensController>
 
     void InitializeLifeCounterMenu()
     {
+        lifeCounterMenu.Initialize();
         lifeCounterMenu.Show();
         mainMenu.SetActive(false);
     }

@@ -292,18 +292,19 @@
     <Compile Include="Assets\GleyPlugins\RateGame\Scripts\VisualScriptingSupport\GameFlowSupport\IncreaseCustomEvents.cs" />
     <Compile Include="Assets\GleyPlugins\RateGame\Scripts\VisualScriptingSupport\GameFlowSupport\ShowRatePopup.cs" />
     <Compile Include="Assets\GleyPlugins\RateGame\Scripts\YesNoPopup.cs" />
-    <Compile Include="Assets\Scripts\AnstractPresetMenu.cs" />
     <Compile Include="Assets\Scripts\CounterLogic.cs" />
     <Compile Include="Assets\Scripts\IPresetSettings.cs" />
-    <Compile Include="Assets\Scripts\InventoryMenu.cs" />
-    <Compile Include="Assets\Scripts\LifeCounterMenu.cs" />
-    <Compile Include="Assets\Scripts\LifeCounterPresetSettings.cs" />
     <Compile Include="Assets\Scripts\LifeCounterScreen.cs" />
     <Compile Include="Assets\Scripts\Lifecounterbuttonprefab.cs" />
+    <Compile Include="Assets\Scripts\Menus\AbstractPresetMenu.cs" />
+    <Compile Include="Assets\Scripts\Menus\InventoryMenu.cs" />
+    <Compile Include="Assets\Scripts\Menus\LifeCounterMenu.cs" />
     <Compile Include="Assets\Scripts\SaveLoadPresets.cs" />
     <Compile Include="Assets\Scripts\ScreenInterface.cs" />
     <Compile Include="Assets\Scripts\ScreensController.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjectUI.cs" />
+    <Compile Include="Assets\Scripts\SettingsMenus\AbstractPresetSettings.cs" />
+    <Compile Include="Assets\Scripts\SettingsMenus\LifeCounterPresetSettings.cs" />
     <Compile Include="Assets\Scripts\SingletonTemplate.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
@@ -517,7 +518,7 @@
       <HintPath>D:/Unitys/2019.4.0f1/Editor/Data/Managed/UnityEditor.dll</HintPath>
     </Reference>
     <Reference Include="UnityWindowsPhonePlugin">
-      <HintPath>D:/Unity Projects/Boardgame_Assistant/Assets/GleyPlugins/AllPlatformsSave/Plugins/UnityWindowsPhonePlugin.dll</HintPath>
+      <HintPath>D:/Unity Projects/Boardassistant/Boardgame_Assistant/Assets/GleyPlugins/AllPlatformsSave/Plugins/UnityWindowsPhonePlugin.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>D:/Unitys/2019.4.0f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>
@@ -874,19 +875,19 @@
       <HintPath>D:/Unitys/2019.4.0f1/Editor/Data/MonoBleedingEdge/lib/mono/unityscript/Boo.Lang.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
-      <HintPath>D:/Unity Projects/Boardgame_Assistant/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+      <HintPath>D:/Unity Projects/Boardassistant/Boardgame_Assistant/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>D:/Unity Projects/Boardgame_Assistant/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>D:/Unity Projects/Boardassistant/Boardgame_Assistant/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>D:/Unity Projects/Boardgame_Assistant/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+      <HintPath>D:/Unity Projects/Boardassistant/Boardgame_Assistant/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>D:/Unity Projects/Boardgame_Assistant/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>D:/Unity Projects/Boardassistant/Boardgame_Assistant/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
-      <HintPath>D:/Unity Projects/Boardgame_Assistant/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+      <HintPath>D:/Unity Projects/Boardassistant/Boardgame_Assistant/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup></ItemGroup>

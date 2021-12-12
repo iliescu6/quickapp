@@ -1185,6 +1185,7 @@ MonoBehaviour:
   diceRollerMenuButton: {fileID: 16380577}
   inventoryMenuButton: {fileID: 673611084}
   lifeCounterMenu: {fileID: 2072784342}
+  inventoryMenu: {fileID: 0}
   screensMenuPopUp: {fileID: 1993661095}
   optionsMenuPopup: {fileID: 1649836601}
   resumeButton: {fileID: 2015439777}
@@ -11921,6 +11922,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b47e6833d6fbc594b926e979c305182e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  path: 
   colorButtonMap: {fileID: 11400000, guid: 89772bcaed23e5d4f8ff8a769734b9f6, type: 2}
   addPreset: {fileID: 891146481}
   backButton: {fileID: 1347409867}
@@ -11931,7 +11933,7 @@ MonoBehaviour:
   presetList:
     list: []
   screen: {fileID: 133785428}
-  list: {fileID: 0}
+  prefabButtons: []
 --- !u!1 &2083981479
 GameObject:
   m_ObjectHideFlags: 0
