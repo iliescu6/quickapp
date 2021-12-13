@@ -9,6 +9,8 @@ using UnityEngine.UI;
 
 public delegate void ShowSceneAction(SerializableLifeCounterPreset text);
 public delegate void ShowLifeCounterSettings(SerializableLifeCounterPreset text);
+public delegate void AddButtonDelegate();
+public delegate void BackButtonDelegate();
 
 abstract public class AbstractPresetMenu : MonoBehaviour
 {
@@ -19,10 +21,9 @@ abstract public class AbstractPresetMenu : MonoBehaviour
     [SerializeField] public Button addPreset;
     [SerializeField] public Button backButton;
     [SerializeField] public Lifecounterbuttonprefab buttonPrefab;
-    [SerializeField] public GameObject container;
-    [SerializeField] public LifeCounterPresetSettings settingsMenu;
+    [SerializeField] public GameObject container;    
     [SerializeField] public PresetList presetList;
-    [SerializeField] public LifeCounterScreen screen;
+    
     public List<Lifecounterbuttonprefab> prefabButtons = new List<Lifecounterbuttonprefab>();
     public SaveLoadPresets data = new SaveLoadPresets();
 
@@ -36,11 +37,7 @@ abstract public class AbstractPresetMenu : MonoBehaviour
         data.LoadData(path, ref presetList);
 
         localShowSceneAction = showSceneAction;
-        localShowSettingsAction = showSettings;
-
-
-        addPreset.onClick.AddListener(AddNewPreset);
-        backButton.onClick.AddListener(BackButton);
+        localShowSettingsAction = showSettings;        
 
         if (presetList.list != null)
         {
@@ -56,7 +53,7 @@ abstract public class AbstractPresetMenu : MonoBehaviour
                 }
 
                 SerializableLifeCounterPreset tempPreset = presetList.list[i];
-                go.SetUpButton(presetList.list[i].currentButtonName, presetList.list[i].buttonSettings, presetList.list[i], sprite, localShowSceneAction);
+                go.SetUpButton(presetList.list[i], sprite, localShowSceneAction);
                 go.editButton.onClick.AddListener(() => localShowSettingsAction.Invoke(go.localPreset) );
                 prefabButtons.Add(go);
             }
@@ -72,7 +69,7 @@ abstract public class AbstractPresetMenu : MonoBehaviour
             if (go != null)
             {
                 Sprite sprite = colorButtonMap.buttonColors.FirstOrDefault(x => x.color == preset.buttonColor).sprite;
-                go.SetUpButton(preset.currentButtonName, preset.buttonSettings, preset, sprite, localShowSceneAction);
+                go.SetUpButton(preset, sprite, localShowSceneAction);
             }
         }
         if (presetList.list.Count != prefabButtons.Count)
@@ -88,28 +85,20 @@ abstract public class AbstractPresetMenu : MonoBehaviour
                     sprite = color.sprite;
                 }
                 SerializableLifeCounterPreset tempPreset = presetList.list[i];
-                go.SetUpButton(presetList.list[i].currentButtonName, presetList.list[i].buttonSettings, presetList.list[i], sprite, localShowSceneAction);
+                go.SetUpButton(presetList.list[i], sprite, localShowSceneAction);
                 go.editButton.onClick.AddListener(()=>localShowSettingsAction.Invoke(go.localPreset));
                 prefabButtons.Add(go);
             }
         }
     }
 
-    public void AddNewPreset()
+    public void InitializeAddPresetBackButtons(AddButtonDelegate addButtonDelegate, BackButtonDelegate backButtonDelegate)
     {
-        settingsMenu.gameObject.SetActive(true);
-        SerializableLifeCounterPreset newPreset = new SerializableLifeCounterPreset();
-        settingsMenu.Initialize(newPreset);
-        gameObject.SetActive(false);
-    }
+        addPreset.onClick.AddListener(()=>addButtonDelegate.Invoke());
+        backButton.onClick.AddListener(()=>backButtonDelegate.Invoke());
+    }   
 
-    public void BackButton()
-    {
-        ScreensController.Instance.ShowMaineMenu();
-        gameObject.SetActive(false);
-    }
-
-    public void SavePreset(SerializableLifeCounterPreset preset)
+    public void SerializePreset(SerializableLifeCounterPreset preset)
     {
         if (presetList.list == null || !presetList.list.Contains(preset))
         {

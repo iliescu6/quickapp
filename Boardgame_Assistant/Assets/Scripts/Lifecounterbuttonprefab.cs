@@ -26,10 +26,10 @@ public class Lifecounterbuttonprefab : MonoBehaviour, IPointerDownHandler, IPoin
 
     public SerializableLifeCounterPreset localPreset;
 
-    public void SetUpButton(string name, string settings, SerializableLifeCounterPreset prest, Sprite sprite, ShowSceneAction action)
+    public void SetUpButton(SerializableLifeCounterPreset prest, Sprite sprite, ShowSceneAction action)
     {
-        buttonName.text = name;
-        buttonSettingsText.text = settings;
+        buttonName.text = prest.currentButtonName;
+        buttonSettingsText.text = prest.buttonSettings;
         localPreset = prest;
         buttonImage.sprite = sprite;
         openScreen = action;

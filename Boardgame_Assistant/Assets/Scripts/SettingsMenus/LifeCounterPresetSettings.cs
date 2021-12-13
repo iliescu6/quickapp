@@ -7,28 +7,27 @@ using System;
 using System.IO;
 using System.Linq;
 
-public class LifeCounterPresetSettings : MonoBehaviour
+public class LifeCounterPresetSettings : AbstractPresetSettings
 {
-    [SerializeField] ScriptableObjectUI colorButtonMap;
-    [SerializeField] Image selectedButtonImage;
-    [SerializeField] TMP_Text selectedButtonNameText;
+
+
+
     [SerializeField] TMP_Text selectedButtonSettingsText;
-    [SerializeField] TMP_InputField nameInputField;
+
     [SerializeField] TMP_InputField startingLifeInputField;
     [SerializeField] TMP_InputField incrementInputField;
     [SerializeField] TMP_Dropdown playerDropDown;
     [SerializeField] TMP_Dropdown matchType;
-    [SerializeField] Button saveButton;
-    [SerializeField] Button exitButton;
-    [SerializeField] List<Button> images = new List<Button>();
+
+
     [SerializeField] LifeCounterMenu menu;
-    SerializableLifeCounterPreset currentPreset;
+
+
+
     public void Initialize(SerializableLifeCounterPreset selectedPreset)
     {
-        currentPreset = selectedPreset;
+        base.Initialize(selectedPreset, menu, SavePreset);
 
-        selectedButtonNameText.text = currentPreset.currentButtonName;
-        nameInputField.text = currentPreset.currentButtonName;
         selectedButtonSettingsText.text = currentPreset.buttonSettings;
         startingLifeInputField.text = currentPreset.startingLifePoints.ToString();
         incrementInputField.text = currentPreset.increment.ToString();
@@ -36,41 +35,16 @@ public class LifeCounterPresetSettings : MonoBehaviour
         //Dropdown variables
         PopulateDropdown(playerDropDown, (Player)currentPreset.players);
         playerDropDown.value = currentPreset.players;
-        playerDropDown.onValueChanged.AddListener(delegate { SetUpMatchType(); });       
+        playerDropDown.onValueChanged.AddListener(delegate { SetUpMatchType(); });
         SetUpMatchType();
         matchType.value = currentPreset.matchType;
-
-        Sprite sprite   = colorButtonMap.buttonColors[0].sprite; 
-        if (currentPreset != null && !string.IsNullOrEmpty(currentPreset.buttonColor))
-        {
-            sprite = colorButtonMap.buttonColors.FirstOrDefault(x => x.color == currentPreset.buttonColor).sprite;
-        }
-
-        saveButton.onClick.AddListener(SavePreset);
-        exitButton.onClick.AddListener(() =>
-        {
-            menu.Show();
-            gameObject.SetActive(false);
-        });
-
-        foreach (Button image in images)
-        {
-            image.onClick.AddListener(delegate { SetSelectedImage(image); });
-        }
     }
-
     void Update()
     {
-        //Initialize();
-        selectedButtonNameText.text = nameInputField.text;
         selectedButtonSettingsText.text = string.Format("P:{0} Life:{1} ±{2}", playerDropDown.value + 1, startingLifeInputField.text, incrementInputField.text);
     }
 
-    public void SetSelectedImage(Button button)
-    {
-        selectedButtonImage.sprite = button.image.sprite;
-        currentPreset.buttonColor = button.name;
-    }
+
 
     void SetUpMatchType()
     {
@@ -94,47 +68,37 @@ public class LifeCounterPresetSettings : MonoBehaviour
         }
     }
 
-    void PopulateDropdown(TMP_Dropdown dropdown, Enum targetEnum)
-    {
-        Type enumType = targetEnum.GetType();
-        List<TMP_Dropdown.OptionData> newOptions = new List<TMP_Dropdown.OptionData>();
-
-        for (int i = 0; i < Enum.GetNames(enumType).Length; i++)
-        {
-            newOptions.Add(new TMP_Dropdown.OptionData(Enum.GetName(enumType, i)));
-        }
-
-        dropdown.ClearOptions();
-        dropdown.AddOptions(newOptions);
-    }
-
-
     public void SavePreset()
     {
-
         currentPreset.currentButtonName = selectedButtonNameText.text;
         currentPreset.buttonSettings = selectedButtonSettingsText.text;
         currentPreset.startingLifePoints = int.Parse(startingLifeInputField.text);
         currentPreset.increment = int.Parse(incrementInputField.text);
         currentPreset.players = playerDropDown.value;
         currentPreset.matchType = matchType.value;
-        menu.SavePreset(currentPreset);
+        menu.SerializePreset(currentPreset);
         menu.Show(currentPreset);
         gameObject.SetActive(false);
     }
 }
 
 [Serializable]
-public class SerializableLifeCounterPreset
+public class SerializableLifeCounterPreset 
 {
+    //should've thought this from the start   
     public string previousButtonName;
     public string currentButtonName;
+    public string buttonColor;
     public string buttonSettings;
     public int startingLifePoints;
     public int increment;
     public int players;
     public int matchType;
-    public string buttonColor;
+}
+
+public class ResourceInfo
+{
+
 }
 
 public enum Player { One, Two, Three, Four }
