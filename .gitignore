@@ -1,0 +1,25 @@
+Builds/
+
+# =============== #
+# Unity generated #
+# =============== #
+Boardgame_Assistant/Temp/
+Boardgame_Assistant/Library/
+Boardgame_Assistant/Logs/
+
+# ===================================== #
+# Visual Studio / MonoDevelop generated #
+# ===================================== #
+ExportedObj/
+obj/
+*.svd
+*.userprefs
+Boardgame_Assistant/*.csproj
+*.pidb
+*.suo
+*.sln
+*.sln.hide
+*.user
+*.unityproj
+*.booproj
+.vs
