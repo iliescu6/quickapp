@@ -6,7 +6,7 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Lifecounterbuttonprefab : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,IDragHandler 
+public class Lifecounterbuttonprefab : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
     [SerializeField] public TMP_Text buttonName;
     [SerializeField] TMP_Text buttonSettingsText;
@@ -24,17 +24,28 @@ public class Lifecounterbuttonprefab : MonoBehaviour, IPointerDownHandler, IPoin
     bool pointerInrect = true;
     float holdTimer;
 
-    public SerializableLifeCounterPreset localPreset;
+    public SerializablePreset localPreset;
 
-    public void SetUpButton(SerializableLifeCounterPreset prest, Sprite sprite, ShowSceneAction action)
+    public void SetUpButton(Sprite sprite, ShowSceneAction action, SerializablePreset preset, DeletePresetAction deleteIt)
     {
-        buttonName.text = prest.currentButtonName;
-        buttonSettingsText.text = prest.buttonSettings;
-        localPreset = prest;
+        buttonName.text = preset.currentButtonName;
+        localPreset = preset;
+        if (preset.lifeCounter != null)
+        {
+            buttonSettingsText.text = preset.lifeCounter.buttonSettings;
+        }
+        else if (preset.resource != null)
+        {
+            buttonSettingsText.gameObject.SetActive(false);
+        }
+
         buttonImage.sprite = sprite;
         openScreen = action;
         returnButton.onClick.AddListener(ReturnButton);
-        deleteButton.onClick.AddListener(DeleteButton);
+        deleteButton.onClick.AddListener(delegate { 
+            deleteIt.Invoke(localPreset, true);
+            Destroy(gameObject);
+        });
     }
 
     public void ReturnButton()
@@ -42,12 +53,6 @@ public class Lifecounterbuttonprefab : MonoBehaviour, IPointerDownHandler, IPoin
         buttonsContainer.SetActive(false);
         nameContainer.SetActive(true);
     }
-
-    public void DeleteButton()
-    {
-        Destroy(gameObject);
-    }
-
     void Update()
     {
         if (holdingButton)

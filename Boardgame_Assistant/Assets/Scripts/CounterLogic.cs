@@ -23,7 +23,7 @@ public class CounterLogic : MonoBehaviour
     {
 
     }
-    public void Initialize(SerializableLifeCounterPreset preset, int playerIndex, int layoutElementValue = 0)
+    public void Initialize(SerializablePreset preset, int playerIndex, int layoutElementValue = 0)
     {
         //clear buttons for reset
         increaseButton.onClick.RemoveAllListeners();
@@ -31,14 +31,14 @@ public class CounterLogic : MonoBehaviour
         inputField.onValueChanged.RemoveAllListeners();
         inputFieldFourPlayer.onValueChanged.RemoveAllListeners();
 
-        currentValue = preset.startingLifePoints;
+        currentValue = preset.lifeCounter.startingLifePoints;
         counterValue.text = currentValue.ToString();
         playerName.text = string.Format("Player {0}", playerIndex);
-        increaseButton.onClick.AddListener(() => SetIncrementButtons(preset.increment));
-        decreaseButton.onClick.AddListener(() => SetIncrementButtons(-preset.increment));
+        increaseButton.onClick.AddListener(() => SetIncrementButtons(preset.lifeCounter.increment));
+        decreaseButton.onClick.AddListener(() => SetIncrementButtons(-preset.lifeCounter.increment));
         inputField.onValueChanged.AddListener(delegate { InputFieldUpdate(); });
         inputFieldFourPlayer.onValueChanged.AddListener(delegate { InputFieldUpdate(); });
-        if (preset.players == 3)
+        if (preset.lifeCounter.players == 3)
         {
             inputField.gameObject.SetActive(false);
             inputFieldFourPlayer.gameObject.SetActive(true);

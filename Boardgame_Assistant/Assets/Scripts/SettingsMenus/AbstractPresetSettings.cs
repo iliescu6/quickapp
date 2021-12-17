@@ -8,6 +8,7 @@ using UnityEngine.UI;
 
 
 public delegate void SavePresetButton();
+public delegate void DeletePresetButton();
 
 abstract public class AbstractPresetSettings : MonoBehaviour
 {
@@ -20,24 +21,22 @@ abstract public class AbstractPresetSettings : MonoBehaviour
     [SerializeField] public List<Button> images = new List<Button>();
     public AbstractPresetMenu abstractMenu;
 
-    public SerializableLifeCounterPreset currentPreset;
-    public void Initialize(SerializableLifeCounterPreset selectedPreset, AbstractPresetMenu _abstractMenu, SavePresetButton spriteSave)
+    public SerializablePreset currentPreset;
+    public void Initialize(AbstractPresetMenu _abstractMenu, SavePresetButton savePreset, SerializablePreset selectedPreset = null)
     {
         currentPreset = selectedPreset;
         abstractMenu = _abstractMenu;
         selectedButtonNameText.text = currentPreset.currentButtonName;
         nameInputField.text = currentPreset.currentButtonName;
 
-
-
-
         Sprite sprite = colorButtonMap.buttonColors[0].sprite;
         if (currentPreset != null && !string.IsNullOrEmpty(currentPreset.buttonColor))
         {
             sprite = colorButtonMap.buttonColors.FirstOrDefault(x => x.color == currentPreset.buttonColor).sprite;
         }
-
-        saveButton.onClick.AddListener(() => spriteSave());
+        saveButton.onClick.RemoveAllListeners();
+        exitButton.onClick.RemoveAllListeners();
+        saveButton.onClick.AddListener(() => savePreset());
         exitButton.onClick.AddListener(() =>
         {
             abstractMenu.Show();
@@ -46,11 +45,12 @@ abstract public class AbstractPresetSettings : MonoBehaviour
 
         foreach (Button image in images)
         {
+            image.onClick.RemoveAllListeners();
             image.onClick.AddListener(delegate { SetSelectedImage(image); });
         }
     }
 
-    private void Update()
+    public virtual void Update()
     {
         selectedButtonNameText.text = nameInputField.text;
     }

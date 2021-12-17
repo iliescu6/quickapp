@@ -1284,19 +1284,19 @@ MonoBehaviour:
   deleteButton: {fileID: 7842657941128350703}
   returnButton: {fileID: 5652927642926005488}
   buttonImage: {fileID: 8166102654894931477}
-  requiredHoldTime: 1
+  requiredHoldTime: 0.5
   localPreset:
     previousButtonName: 
     currentButtonName: 
-    buttonSettings: 
-    startingLifePoints: 0
-    increment: 0
-    players: 0
-    matchType: 0
     buttonColor: 
-    xSprite: 0
-    ySprite: 0
-    bytes: 
+    resource:
+      resourceInfo: []
+    lifeCounter:
+      buttonSettings: 
+      startingLifePoints: 0
+      increment: 0
+      players: 0
+      matchType: 0
 --- !u!114 &3442739134844780355
 MonoBehaviour:
   m_ObjectHideFlags: 0

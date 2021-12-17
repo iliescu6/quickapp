@@ -17,11 +17,13 @@ public class ScreensController : SingletonTemplate<ScreensController>
     [SerializeField] LifeCounterMenu lifeCounterMenu;
     //[SerializeField] DiceRollerScreen diceRollerMenu;
     [SerializeField] InventoryMenu inventoryMenu;
-    [SerializeField] GameObject screensMenuPopUp;
+    [SerializeField] public GameObject screensMenuPopUp;
     [SerializeField] Button optionsMenuPopup;
     [SerializeField] Button resumeButton;
     [SerializeField] Button restartButton;
     [SerializeField] Button mainMenuButton;
+    [SerializeField] Button misceleneousButton;
+    [SerializeField] MiscelaneousMenu misceleneousMenu;
     public ScreenInterface currentScreen;
     private void Awake()
     {
@@ -32,6 +34,7 @@ public class ScreensController : SingletonTemplate<ScreensController>
         resumeButton.onClick.AddListener(Resume);
         restartButton.onClick.AddListener(Restart);
         mainMenuButton.onClick.AddListener(ReturnToMainMenu);
+        misceleneousButton.onClick.AddListener(ShowMiscelenaousMenu);
     }
 
     void InitializeLifeCounterMenu()
@@ -53,6 +56,11 @@ public class ScreensController : SingletonTemplate<ScreensController>
         mainMenu.SetActive(true);
     }
 
+    public void ShowMiscelenaousMenu()
+    {
+        misceleneousMenu.gameObject.SetActive(true);
+        screensMenuPopUp.SetActive(false);
+    }
     public void ShowOptionsButton()
     {
         optionsMenuPopup.gameObject.SetActive(true);

@@ -20,32 +20,32 @@ public class LifeCounterMenu : AbstractPresetMenu
         {
             return;
         }
-        base.Initialize(fileName, ShowCounterScreen, ShowLifeCounterSettings);
+        base.Initialize(fileName, ShowCounterScreen, ShowLifeCounterSettings,base.SerializePreset);
         base.InitializeAddPresetBackButtons(AddNewPreset, BackButton);//todo think there was a clever way but again, quick and dirty app
         initialized = true;
     }
 
-    public void ShowLifeCounterSettings(SerializableLifeCounterPreset preset)
+    public void ShowLifeCounterSettings(SerializablePreset preset)
     {
         settingsMenu.gameObject.SetActive(true);
         settingsMenu.Initialize(preset);
         gameObject.SetActive(false);
     }
 
-    public void ShowCounterScreen(SerializableLifeCounterPreset preset)
+    public void ShowCounterScreen(SerializablePreset preset)
     {
         screen.Initialize(preset);
         screen.gameObject.SetActive(true);
     }
 
-    public void ShowInventorySettings(SerializableLifeCounterPreset preset)
+    public void ShowInventorySettings(SerializablePreset preset)
     {
         settingsMenu.gameObject.SetActive(true);
         settingsMenu.Initialize(preset);
         gameObject.SetActive(false);
     }
 
-    public void ShowInventoryScreen(SerializableLifeCounterPreset preset)
+    public void ShowInventoryScreen(SerializablePreset preset)
     {
         screen.Initialize(preset);
         screen.gameObject.SetActive(true);
@@ -54,7 +54,7 @@ public class LifeCounterMenu : AbstractPresetMenu
     public void AddNewPreset()
     {
         settingsMenu.gameObject.SetActive(true);
-        SerializableLifeCounterPreset newPreset = new SerializableLifeCounterPreset();
+        SerializablePreset newPreset = new SerializablePreset();
         settingsMenu.Initialize(newPreset);
         gameObject.SetActive(false);
     }

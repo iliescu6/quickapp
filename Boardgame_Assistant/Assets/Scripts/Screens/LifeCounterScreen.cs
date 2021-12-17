@@ -10,7 +10,7 @@ public class LifeCounterScreen : MonoBehaviour, ScreenInterface
     [SerializeField] GameObject rightSideFour;
     [SerializeField] GameObject containerOne;//container used for 1/2/3 players
     List<CounterLogic> counters = new List<CounterLogic>();
-    SerializableLifeCounterPreset currentPreset;
+    SerializablePreset currentPreset;
 
     private void Awake()
     {
@@ -37,12 +37,12 @@ public class LifeCounterScreen : MonoBehaviour, ScreenInterface
         gameObject.SetActive(false);
     }
 
-    public void Initialize(SerializableLifeCounterPreset preset)
+    public void Initialize(SerializablePreset preset)
     {
         ScreensController.Instance.currentScreen = this;
         ScreensController.Instance.ShowOptionsButton();
         currentPreset = preset;
-        switch (preset.players)
+        switch (preset.lifeCounter.players)
         {
             case (0):
                 CounterLogic counterOne = (CounterLogic)Instantiate(counterPrefab, containerOne.transform);
@@ -53,7 +53,7 @@ public class LifeCounterScreen : MonoBehaviour, ScreenInterface
                 for (int i = 0; i < 2; i++)
                 {
                     CounterLogic counter = (CounterLogic)Instantiate(counterPrefab, containerOne.transform);
-                    if (preset.matchType == 0)
+                    if (preset.lifeCounter.matchType == 0)
                     {
                         counter.rectTransform.Rotate(new Vector3(0, 0, 180 * i));
                     }
@@ -70,7 +70,7 @@ public class LifeCounterScreen : MonoBehaviour, ScreenInterface
                 }
                 break;
             case (3):
-                if (preset.matchType == 0 || preset.matchType == 2)//1-free for all, 3= 2 vs 2
+                if (preset.lifeCounter.matchType == 0 || preset.lifeCounter.matchType == 2)//1-free for all, 3= 2 vs 2
                 {
                     for (int i = 0; i < 4; i++)
                     {

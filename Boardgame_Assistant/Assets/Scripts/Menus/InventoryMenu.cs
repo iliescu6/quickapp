@@ -15,19 +15,19 @@ public class InventoryMenu : AbstractPresetMenu
         {
             return;
         }
-        base.Initialize(fileName, ShowInventoryScreen, ShowInventorySettings);
+        base.Initialize(fileName, ShowInventoryScreen, ShowInventorySettings,base.SerializePreset);
         base.InitializeAddPresetBackButtons(AddNewPreset, BackButton);
         initialized = true;
     }
 
-    public void ShowInventorySettings(SerializableLifeCounterPreset preset)
+    public void ShowInventorySettings(SerializablePreset preset)
     {
         settingsMenu.gameObject.SetActive(true);
         settingsMenu.Initialize(preset);
         gameObject.SetActive(false);
     }
 
-    public void ShowInventoryScreen(SerializableLifeCounterPreset preset)
+    public void ShowInventoryScreen(SerializablePreset preset)
     {
         screen.Initialize(preset);
         screen.gameObject.SetActive(true);
@@ -36,7 +36,7 @@ public class InventoryMenu : AbstractPresetMenu
     public void AddNewPreset()
     {
         settingsMenu.gameObject.SetActive(true);
-        SerializableLifeCounterPreset newPreset = new SerializableLifeCounterPreset();
+        SerializablePreset newPreset = new SerializablePreset();
         settingsMenu.Initialize(newPreset);
         gameObject.SetActive(false);
     }
@@ -45,18 +45,5 @@ public class InventoryMenu : AbstractPresetMenu
     {
         ScreensController.Instance.ShowMaineMenu();
         gameObject.SetActive(false);
-    }
-
-    public void SavePreset()
-    {
-        //currentPreset.currentButtonName = selectedButtonNameText.text;
-        //currentPreset.buttonSettings = selectedButtonSettingsText.text;
-        //currentPreset.startingLifePoints = int.Parse(startingLifeInputField.text);
-        //currentPreset.increment = int.Parse(incrementInputField.text);
-        //currentPreset.players = playerDropDown.value;
-        //currentPreset.matchType = matchType.value;
-        //menu.SerializePreset(currentPreset);
-        //menu.Show(currentPreset);
-        //gameObject.SetActive(false);
-    }
+    }   
 }

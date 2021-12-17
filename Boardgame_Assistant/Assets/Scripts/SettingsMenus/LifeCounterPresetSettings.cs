@@ -24,23 +24,24 @@ public class LifeCounterPresetSettings : AbstractPresetSettings
 
 
 
-    public void Initialize(SerializableLifeCounterPreset selectedPreset)
+    public void Initialize(SerializablePreset selectedPreset)
     {
-        base.Initialize(selectedPreset, menu, SavePreset);
+        base.Initialize(menu, SavePreset, selectedPreset);
 
-        selectedButtonSettingsText.text = currentPreset.buttonSettings;
-        startingLifeInputField.text = currentPreset.startingLifePoints.ToString();
-        incrementInputField.text = currentPreset.increment.ToString();
+        selectedButtonSettingsText.text = currentPreset.lifeCounter.buttonSettings;
+        startingLifeInputField.text = currentPreset.lifeCounter.startingLifePoints.ToString();
+        incrementInputField.text = currentPreset.lifeCounter.increment.ToString();
 
         //Dropdown variables
-        PopulateDropdown(playerDropDown, (Player)currentPreset.players);
-        playerDropDown.value = currentPreset.players;
+        PopulateDropdown(playerDropDown, (Player)currentPreset.lifeCounter.players);
+        playerDropDown.value = currentPreset.lifeCounter.players;
         playerDropDown.onValueChanged.AddListener(delegate { SetUpMatchType(); });
         SetUpMatchType();
-        matchType.value = currentPreset.matchType;
+        matchType.value = currentPreset.lifeCounter.matchType;
     }
     void Update()
     {
+        base.Update();
         selectedButtonSettingsText.text = string.Format("P:{0} Life:{1} ±{2}", playerDropDown.value + 1, startingLifeInputField.text, incrementInputField.text);
     }
 
@@ -55,15 +56,15 @@ public class LifeCounterPresetSettings : AbstractPresetSettings
                 break;
             case (1):
                 matchType.gameObject.SetActive(true);
-                PopulateDropdown(matchType, (TwoPlayers)currentPreset.matchType);
+                PopulateDropdown(matchType, (TwoPlayers)currentPreset.lifeCounter.matchType);
                 break;
             case (2):
                 matchType.gameObject.SetActive(true);
-                PopulateDropdown(matchType, (ThreePlayers)currentPreset.matchType);
+                PopulateDropdown(matchType, (ThreePlayers)currentPreset.lifeCounter.matchType);
                 break;
             case (3):
                 matchType.gameObject.SetActive(true);
-                PopulateDropdown(matchType, (FourPlayer)currentPreset.matchType);
+                PopulateDropdown(matchType, (FourPlayer)currentPreset.lifeCounter.matchType);
                 break;
         }
     }
@@ -71,11 +72,12 @@ public class LifeCounterPresetSettings : AbstractPresetSettings
     public void SavePreset()
     {
         currentPreset.currentButtonName = selectedButtonNameText.text;
-        currentPreset.buttonSettings = selectedButtonSettingsText.text;
-        currentPreset.startingLifePoints = int.Parse(startingLifeInputField.text);
-        currentPreset.increment = int.Parse(incrementInputField.text);
-        currentPreset.players = playerDropDown.value;
-        currentPreset.matchType = matchType.value;
+        currentPreset.lifeCounter.buttonSettings = selectedButtonSettingsText.text;
+        currentPreset.lifeCounter.startingLifePoints = int.Parse(startingLifeInputField.text);
+        currentPreset.lifeCounter.increment = int.Parse(incrementInputField.text);
+        currentPreset.lifeCounter.players = playerDropDown.value;
+        currentPreset.lifeCounter.matchType = matchType.value;
+        //menu.SerializePreset(currentPreset);
         menu.SerializePreset(currentPreset);
         menu.Show(currentPreset);
         gameObject.SetActive(false);
@@ -83,12 +85,20 @@ public class LifeCounterPresetSettings : AbstractPresetSettings
 }
 
 [Serializable]
-public class SerializableLifeCounterPreset 
+public class SerializablePreset
 {
+
     //should've thought this from the start   
     public string previousButtonName;
     public string currentButtonName;
     public string buttonColor;
+    public SerializedResourcePreset resource = new SerializedResourcePreset();
+    public SerializableLifePreset lifeCounter = new SerializableLifePreset();
+}
+
+[Serializable]
+public class SerializableLifePreset
+{
     public string buttonSettings;
     public int startingLifePoints;
     public int increment;
@@ -96,9 +106,24 @@ public class SerializableLifeCounterPreset
     public int matchType;
 }
 
-public class ResourceInfo
+[Serializable]
+public class SerializedResourcePreset//TODO I may just say fuck it and add it all in one....or..
 {
+    public List<Resource> resourceInfo = new List<Resource>();
+}
 
+[Serializable]
+public class Resource
+{
+    public string resourceName;
+    public int resourceStartingAmount;
+    public string resourceIcon;//I know there was a better way but i wanna make this app fast
+    public Resource(string name, int amount)
+    {
+        resourceName = name;
+        resourceStartingAmount = amount;
+    }
+    //public int increment;
 }
 
 public enum Player { One, Two, Three, Four }
