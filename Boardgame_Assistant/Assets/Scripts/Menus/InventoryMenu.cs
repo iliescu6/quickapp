@@ -31,6 +31,7 @@ public class InventoryMenu : AbstractPresetMenu
     {
         screen.Initialize(preset);
         screen.gameObject.SetActive(true);
+        gameObject.SetActive(false);
     }
 
     public void AddNewPreset()

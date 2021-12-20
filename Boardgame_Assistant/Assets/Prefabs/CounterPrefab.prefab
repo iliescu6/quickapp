@@ -549,14 +549,14 @@ MonoBehaviour:
   m_VerticalScrollbar: {fileID: 0}
   m_VerticalScrollbarEventHandler: {fileID: 0}
   m_ScrollSensitivity: 1
-  m_ContentType: 0
+  m_ContentType: 2
   m_InputType: 0
   m_AsteriskChar: 42
-  m_KeyboardType: 0
+  m_KeyboardType: 4
   m_LineType: 0
   m_HideMobileInput: 0
   m_HideSoftKeyboard: 0
-  m_CharacterValidation: 0
+  m_CharacterValidation: 2
   m_RegexValue: 
   m_GlobalPointSize: 14
   m_CharacterLimit: 0
@@ -890,6 +890,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac56df13c0ec75d45b3e24bd53be8f5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttonBolors: {fileID: 11400000, guid: 89772bcaed23e5d4f8ff8a769734b9f6, type: 2}
   playerName: {fileID: 3243915623296939571}
   counterValue: {fileID: 3243915624932054985}
   decreaseButton: {fileID: 3243915624203142464}
@@ -899,6 +900,7 @@ MonoBehaviour:
   activeInputField: {fileID: 0}
   layoutElementCounter: {fileID: 3243915625302368792}
   rectTransform: {fileID: 3243915624533975114}
+  image: {fileID: 3243915624533975093}
 --- !u!1 &3243915624713319649
 GameObject:
   m_ObjectHideFlags: 0
@@ -1331,7 +1333,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 290.25
+  m_fontSize: 500
   m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1546,7 +1548,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 36.75
+  m_fontSize: 328.15
   m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1781,14 +1783,14 @@ MonoBehaviour:
   m_VerticalScrollbar: {fileID: 0}
   m_VerticalScrollbarEventHandler: {fileID: 0}
   m_ScrollSensitivity: 1
-  m_ContentType: 0
+  m_ContentType: 2
   m_InputType: 0
   m_AsteriskChar: 42
-  m_KeyboardType: 0
+  m_KeyboardType: 4
   m_LineType: 0
   m_HideMobileInput: 0
   m_HideSoftKeyboard: 0
-  m_CharacterValidation: 0
+  m_CharacterValidation: 2
   m_RegexValue: 
   m_GlobalPointSize: 14
   m_CharacterLimit: 0

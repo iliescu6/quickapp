@@ -18,6 +18,7 @@ public class Lifecounterbuttonprefab : MonoBehaviour, IPointerDownHandler, IPoin
     [SerializeField] Button returnButton;
     [SerializeField] Image buttonImage;
     [SerializeField] float requiredHoldTime;
+    [SerializeField] Image loadingBar;
     ShowSceneAction openScreen;
 
     bool holdingButton;
@@ -39,10 +40,13 @@ public class Lifecounterbuttonprefab : MonoBehaviour, IPointerDownHandler, IPoin
             buttonSettingsText.gameObject.SetActive(false);
         }
 
+        presetButton.onClick.AddListener(OpenScene);
+
         buttonImage.sprite = sprite;
         openScreen = action;
         returnButton.onClick.AddListener(ReturnButton);
-        deleteButton.onClick.AddListener(delegate { 
+        deleteButton.onClick.AddListener(delegate
+        {
             deleteIt.Invoke(localPreset, true);
             Destroy(gameObject);
         });
@@ -52,12 +56,30 @@ public class Lifecounterbuttonprefab : MonoBehaviour, IPointerDownHandler, IPoin
     {
         buttonsContainer.SetActive(false);
         nameContainer.SetActive(true);
+        loadingBar.gameObject.SetActive(true);
     }
     void Update()
     {
-        if (holdingButton)
+        if (holdingButton && !buttonsContainer.activeInHierarchy)
         {
             holdTimer += Time.deltaTime;
+        }
+
+        if (holdTimer > 0.2 && holdTimer <= requiredHoldTime)
+        {
+            loadingBar.fillAmount = (holdTimer - 0.2f) / (requiredHoldTime - 0.2f);
+        }
+        else if (holdTimer < 0.2)
+        {
+            loadingBar.fillAmount = 0;
+        }
+    }
+
+    public void OpenScene()
+    {
+        if (holdTimer < 0.2f && !buttonsContainer.activeInHierarchy)
+        {
+            openScreen.Invoke(localPreset);
         }
     }
 
@@ -75,14 +97,11 @@ public class Lifecounterbuttonprefab : MonoBehaviour, IPointerDownHandler, IPoin
     public void OnPointerUp(PointerEventData eventData)
     {
         holdingButton = false;
-        if (holdTimer > requiredHoldTime && pointerInrect)
+        if (holdTimer > requiredHoldTime && pointerInrect && holdTimer >= 0.2f)
         {
             buttonsContainer.SetActive(true);
             nameContainer.SetActive(false);
-        }
-        else if (pointerInrect)
-        {
-            openScreen.Invoke(localPreset);
+            loadingBar.gameObject.SetActive(false);
         }
         holdTimer = 0;
     }

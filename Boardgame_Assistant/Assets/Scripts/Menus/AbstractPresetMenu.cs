@@ -41,7 +41,7 @@ abstract public class AbstractPresetMenu : MonoBehaviour
         localShowSettingsAction = showSettings;
         localDeletePresetAction = deleteIt;
 
-        if (presetList.list != null)
+        if (presetList.list != null && presetList.list.Count<=7)
         {
             for (int i = 0; i < presetList.list.Count; i++)
             {

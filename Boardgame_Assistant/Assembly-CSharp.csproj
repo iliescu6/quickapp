@@ -293,6 +293,7 @@
     <Compile Include="Assets\GleyPlugins\RateGame\Scripts\VisualScriptingSupport\GameFlowSupport\ShowRatePopup.cs" />
     <Compile Include="Assets\GleyPlugins\RateGame\Scripts\YesNoPopup.cs" />
     <Compile Include="Assets\MiscelaneousMenu.cs" />
+    <Compile Include="Assets\Scripts\AdManager.cs" />
     <Compile Include="Assets\Scripts\CounterLogic.cs" />
     <Compile Include="Assets\Scripts\Lifecounterbuttonprefab.cs" />
     <Compile Include="Assets\Scripts\Menus\AbstractPresetMenu.cs" />
@@ -882,11 +883,17 @@
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>D:/Unity Projects/Boardassistant/Boardgame_Assistant/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.Advertisements">
+      <HintPath>D:/Unity Projects/Boardassistant/Boardgame_Assistant/Library/ScriptAssemblies/UnityEngine.Advertisements.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>D:/Unity Projects/Boardassistant/Boardgame_Assistant/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>D:/Unity Projects/Boardassistant/Boardgame_Assistant/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Advertisements.Editor">
+      <HintPath>D:/Unity Projects/Boardassistant/Boardgame_Assistant/Library/ScriptAssemblies/UnityEngine.Advertisements.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>D:/Unity Projects/Boardassistant/Boardgame_Assistant/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>

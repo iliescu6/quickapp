@@ -20,7 +20,7 @@ public class LifeCounterMenu : AbstractPresetMenu
         {
             return;
         }
-        base.Initialize(fileName, ShowCounterScreen, ShowLifeCounterSettings,base.SerializePreset);
+        base.Initialize(fileName, ShowCounterScreen, ShowLifeCounterSettings, base.SerializePreset);
         base.InitializeAddPresetBackButtons(AddNewPreset, BackButton);//todo think there was a clever way but again, quick and dirty app
         initialized = true;
     }
@@ -36,6 +36,7 @@ public class LifeCounterMenu : AbstractPresetMenu
     {
         screen.Initialize(preset);
         screen.gameObject.SetActive(true);
+        gameObject.SetActive(false);
     }
 
     public void ShowInventorySettings(SerializablePreset preset)

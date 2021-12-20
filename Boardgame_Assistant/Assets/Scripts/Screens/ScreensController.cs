@@ -85,6 +85,6 @@ public class ScreensController : SingletonTemplate<ScreensController>
     {
         currentScreen.DeleteCurrentMatchSession();
         screensMenuPopUp.gameObject.SetActive(false);
-
+        mainMenu.SetActive(true);
     }
 }
