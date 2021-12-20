@@ -3,9 +3,9 @@ Builds/
 # =============== #
 # Unity generated #
 # =============== #
-Boardgame_Assistant/Temp/
-Boardgame_Assistant/Library/
-Boardgame_Assistant/Logs/
+BoardgameAssistant/Temp/
+BoardgameAssistant/Library/
+BoardgameAssistant/Logs/
 
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
@@ -14,7 +14,7 @@ ExportedObj/
 obj/
 *.svd
 *.userprefs
-Boardgame_Assistant/*.csproj
+BoardgameAssistant/*.csproj
 *.pidb
 *.suo
 *.sln
