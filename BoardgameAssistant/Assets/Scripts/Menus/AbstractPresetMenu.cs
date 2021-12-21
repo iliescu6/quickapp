@@ -36,12 +36,16 @@ abstract public class AbstractPresetMenu : MonoBehaviour
     {
         path = Application.persistentDataPath + fileName;// "/LifeCounterList.json";
         data.LoadData(path, ref presetList);
-
+        if ((presetList == null || presetList.list.Count == 0) && PlayerPrefs.GetInt("InitialTemplate") == 0)
+        {
+            PlayerPrefs.SetInt("InitialTemplate", 1);
+            CreateInitialPresets(ref presetList);
+        }
         localShowSceneAction = showSceneAction;
         localShowSettingsAction = showSettings;
         localDeletePresetAction = deleteIt;
 
-        if (presetList.list != null && presetList.list.Count<=7)
+        if (presetList.list != null && presetList.list.Count <= 7)
         {
             for (int i = 0; i < presetList.list.Count; i++)
             {
@@ -148,30 +152,43 @@ abstract public class AbstractPresetMenu : MonoBehaviour
         }
     }
 
-    //public void SerializePreset<T>(T preset)//, string buttonName,string previousButtonName)
-    //{
-    //    if (presetList.list == null || !presetList.Contains<T>(preset))
-    //    {
-    //        if (presetList.list == null)
-    //        {
-    //            presetList.list = new List<SerializablePreset>();
-    //        }
-    //        presetList.Add(preset);
-    //        data.SaveData(path, ref presetList);
-    //    }
-    //    //else if (presetList.list.FirstOrDefault(x => x.currentButtonName == buttonName) != null || presetList.list.FirstOrDefault(x => x.currentButtonName == buttonName) != null)
-    //    //{
-    //    //    T temp;
-    //    //    temp = presetList.list.FirstOrDefault(x => x.currentButtonName == buttonName);
-    //    //    if (temp == null)
-    //    //    {
-    //    //        temp = presetList.list.FirstOrDefault(x => x.currentButtonName == previousButtonName);
-    //    //    }
-    //    //    temp = preset;//TODO what am i doing here?
+    public void CreateInitialPresets(ref PresetList presetList)
+    {
+        SerializedResourcePreset resource = new SerializedResourcePreset();
+        resource.resourceInfo.Add(new Resource("Cash", 1500));
+        SerializablePreset presetResources = new SerializablePreset();
+        presetResources.currentButtonName = "Capitalist Game";
+        presetResources.buttonColor = "red";
+        presetResources.resource = resource;
 
-    //    //    data.SaveData(path, ref presetList);
-    //    //}
-    //}
+        presetList.list.Add(presetResources);
+        data.SaveData(Application.persistentDataPath + "/InventoryList.json", ref presetList);
+
+
+        presetList.list = new List<SerializablePreset>();
+        presetResources.currentButtonName = "YGO 8000";
+        presetResources.lifeCounter.buttonSettings = "P:2 Life:8000 ±100";
+        presetResources.lifeCounter.startingLifePoints = 8000;
+        presetResources.buttonColor = "red";
+        presetResources.lifeCounter.increment = 100;
+        presetResources.lifeCounter.players = 1;
+        presetResources.lifeCounter.matchType = 0;
+
+        presetList.list.Add(presetResources);
+
+        presetResources = new SerializablePreset();
+        presetResources.currentButtonName = "MTG";
+        presetResources.lifeCounter.buttonSettings = "P:2 Life:20 ±1";
+        presetResources.lifeCounter.startingLifePoints = 20;
+        presetResources.buttonColor = "red";
+        presetResources.lifeCounter.increment = 1;
+        presetResources.lifeCounter.players = 1;
+        presetResources.lifeCounter.matchType = 0;
+
+        presetList.list.Add(presetResources);
+        data.SaveData(Application.persistentDataPath + "/LifeCounterList.json", ref presetList); 
+    }
+
 }
 
 [Serializable]
